@@ -1,16 +1,22 @@
+
 clc;
 close all;
 clear all;
-
+I = imread('coins.png');
+imshow(I)
+title('Original Image')
 
 %% 
-image = imread("63.png");
+image = imread("266.png");
 hsv = rgb2hsv(image);
 h = hsv(:, :, 1);
 h(h > 330 /  360) = 0;
 training = h(:);
 startdata = [0;60/360;120/360;180/360;240/360;300/360];
-[IDX, C] = kmeans(training, 6, 'Start', st)
+[IDX, C] = kmeans(training, 6, 'Start', startdata);
+idbw = (IDX == 1);
+template = reshape(idbw, size(h));
+figure, imshow(template),title('1');
 %%
 % 读入包含叶子和背景的彩色图片
 image = imread('63.png');  % 替换为你的图片路径

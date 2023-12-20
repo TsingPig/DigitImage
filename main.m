@@ -1,8 +1,26 @@
+
+%%
 clc;
 close all;
 clear all;
+%% 
+I = rgb2gray(imread('184.png'));
+imshow(I)
+title('Original Image')
 
 
+r =  drawpolygon ;
+mask = createMask(r);
+
+imshow(mask)
+title('Initial Contour Location')
+
+
+bw = activecontour(I,mask,1000,'edge');
+
+
+imshow(bw)
+title('Segmented Image, 300 Iterations')
 %% 
 image = imread("266.png");
 hsv = rgb2hsv(image);
